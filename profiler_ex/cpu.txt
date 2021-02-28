@@ -1,0 +1,62 @@
+Wrote profile results to sort.py.lprof
+Timer unit: 1e-06 s
+
+Total time: 0.193959 s
+File: sort.py
+Function: insertionsort at line 11
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    11                                           @profile
+    12                                           def insertionsort(array):
+    13                                           
+    14     26393       6204.0      0.2      3.2      for i in range(len(array)):
+    15     25393       5758.0      0.2      3.0          j = i-1
+    16     25393       6000.0      0.2      3.1          v = array[i]
+    17    234457      65497.0      0.3     33.8          while j >= 0 and v < array[j]:
+    18    209064      55259.0      0.3     28.5              array[j+1] = array[j]
+    19    209064      48149.0      0.2     24.8              j -= 1
+    20     25393       6853.0      0.3      3.5          array[j+1] = v
+    21      1000        239.0      0.2      0.1      return array
+
+Total time: 0.079189 s
+File: sort.py
+Function: quicksort at line 23
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    23                                           @profile 
+    24                                           def quicksort(array):
+    25     32356      13096.0      0.4     16.5      if len(array) <= 1:
+    26     16678       5330.0      0.3      6.7          return array
+    27     15678       5598.0      0.4      7.1      pivot = array[0]
+    28     15678      21018.0      1.3     26.5      left = [i for i in array[1:] if i < pivot]
+    29     15678      20000.0      1.3     25.3      right = [i for i in array[1:] if i >= pivot]
+    30     15678      14147.0      0.9     17.9      return quicksort(left) + [pivot] + quicksort(right)
+
+Total time: 0.177896 s
+File: sort.py
+Function: quicksort_inplace at line 32
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    32                                           @profile 
+    33                                           def quicksort_inplace(array, low=0, high=None):
+    34     34412      10564.0      0.3      5.9      if len(array) <= 1:
+    35        34          9.0      0.3      0.0          return array
+    36     34378       8795.0      0.3      4.9      if high is None:
+    37       966        334.0      0.3      0.2          high = len(array)-1
+    38     34378       9093.0      0.3      5.1      if low >= high:
+    39     17672       4030.0      0.2      2.3          return array
+    40                                           
+    41     16706       4376.0      0.3      2.5      pivot = array[high]
+    42     16706       4554.0      0.3      2.6      j = low-1
+    43    126736      35186.0      0.3     19.8      for i in range(low, high):
+    44    110030      29784.0      0.3     16.7          if array[i] <= pivot:
+    45     57392      14952.0      0.3      8.4              j += 1
+    46     57392      19232.0      0.3     10.8              array[i], array[j] = array[j], array[i]
+    47     16706       6603.0      0.4      3.7      array[high], array[j+1] = array[j+1], array[high]
+    48     16706      13478.0      0.8      7.6      quicksort_inplace(array, low, j)
+    49     16706      12795.0      0.8      7.2      quicksort_inplace(array, j+2, high)
+    50     16706       4111.0      0.2      2.3      return array
+
